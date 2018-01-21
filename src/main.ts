@@ -1,31 +1,14 @@
-const spawnName = 'Spawn1';
-const spawn     = Game.spawns[spawnName];
+import { ErrorMapper } from "utils/ErrorMapper";
 
-if ( spawn.room.find(FIND_CREEPS).length === 0 ) {
-  spawn.spawnCreep([WORK, CARRY, MOVE], 'Harvester1');
-}
+// When compiling TS to JS and bundling with rollup, the line numbers and file names in error messages change
+// This utility uses source maps to get the line numbers and file names of the original, TS source code
+export const loop = ErrorMapper.wrapLoop(() => {
+  console.log(`Current game tick is ${Game.time}`);
 
-if ( spawn.energy === spawn.energyCapacity ) {
-  if ( spawn.room.find(FIND_CREEPS).length < 2 ) {
-    spawn.spawnCreep( [WORK, CARRY, MOVE], 'Harvester2' );
-  }
-}
-
-for ( const i in Game.creeps ) {
-  let creep  = Game.creeps[i];
-  let source = Game.creeps[i].pos.findClosestByPath( FIND_SOURCES );
-
-  if ( creep.harvest(source) === ERR_NOT_IN_RANGE ) {
-    // console.log(`${creep.name} not in range`);
-    creep.moveTo(source);
-  } else {
-    // console.log(`${creep.name} can harvest`);
-    if ( creep.carry.energy === creep.carryCapacity ) {
-      if ( creep.transfer(Game.spawns[spawnName], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE ) {
-          creep.moveTo( Game.spawns[spawnName] );
-      } 
-    } else {
-      creep.harvest( source );
+  // Automatically delete memory of missing creeps
+  for (const name in Memory.creeps) {
+    if (!(name in Game.creeps)) {
+      delete Memory.creeps[name];
     }
   }
-}
+});
