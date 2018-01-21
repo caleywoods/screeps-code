@@ -1,0 +1,22 @@
+{
+  "name": "screeps-code",
+  "version": "1.0.0",
+  "description": "Code for screeps, an mmo rts game for programmers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caleywoods/screeps-code.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caleywoods/screeps-code/issues"
+  },
+  "homepage": "https://github.com/caleywoods/screeps-code#readme",
+  "devDependencies": {
+    "typescript": "^2.6.2"
+  }
+}
