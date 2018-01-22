@@ -21,16 +21,16 @@ export class Spawner {
         memory: {role: 'harvester'}
       });
 
-      if ( creepAttempt === 0 ) {
+      if ( creepAttempt === OK ) {
         console.log('Creep successfully queued for spawning.');
         this.panoptes.harvesterCount++;
       }
 
-      if ( creepAttempt === -6 ) {
+      if ( creepAttempt === ERR_NOT_ENOUGH_ENERGY ) {
         console.log('Not enough power to initiate creep spawning.');
       }
 
-      if ( creepAttempt === -3 ) {
+      if ( creepAttempt === ERR_NAME_EXISTS ) {
         // creep name already exists - try to get a new name
         console.log(`Creep with name: Harvester${nextInLine} already exists.`);
       }
