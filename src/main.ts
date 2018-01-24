@@ -25,20 +25,20 @@ export const loop = ErrorMapper.wrapLoop(() => {
     }
   }
 
-  let spawner = new Spawner( spawnName );
+  let spawner = new Spawner( spawnName, roomName );
 
   // Should just fire once, then the bool is tripped to true
-  spawner.initializeRoom( roomName );
+  spawner.initializeRoom();
 
   if ( Game.rooms[roomName].memory.harvesterCount < Game.rooms[roomName].memory.harvesterMax ) {
-    let spawn = spawner.spawnCreep( 'harvester', roomName );
+    let spawn = spawner.spawnCreep( 'harvester' );
     if ( spawn === OK ) {
       Game.rooms[roomName].memory.harvesterCount++;
     }
   }
 
   if ( Game.rooms[roomName].memory.upgraderCount < Game.rooms[roomName].memory.upgraderMax ) {
-    let spawn = spawner.spawnCreep( 'upgrader', roomName );
+    let spawn = spawner.spawnCreep( 'upgrader' );
     if ( spawn === OK ) {
       Game.rooms[roomName].memory.upgraderCount++;
     }

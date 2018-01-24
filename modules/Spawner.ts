@@ -1,23 +1,23 @@
-import { Harvester } from './Harvester';
-
 export class Spawner {
   public spawnName: string;
+  public roomName: string;
 
-  constructor(spawnName: string) {
+  constructor(spawnName: string, roomName: string) {
     this.spawnName = spawnName;
+    this.roomName  = roomName;
   }
 
-  initializeRoom( roomName: string) : void {
-    if ( ! Game.rooms[roomName].memory.initializedFlag ) {
-      Game.rooms[roomName].memory.harvesterCount  = 0;
-      Game.rooms[roomName].memory.harvesterMax    = 5;
-      Game.rooms[roomName].memory.upgraderCount   = 0;
-      Game.rooms[roomName].memory.upgraderMax     = 5;
-      Game.rooms[roomName].memory.initializedFlag = true;
+  initializeRoom() : void {
+    if ( ! Game.rooms[this.roomName].memory.initializedFlag ) {
+      Game.rooms[this.roomName].memory.harvesterCount  = 0;
+      Game.rooms[this.roomName].memory.harvesterMax    = 5;
+      Game.rooms[this.roomName].memory.upgraderCount   = 0;
+      Game.rooms[this.roomName].memory.upgraderMax     = 5;
+      Game.rooms[this.roomName].memory.initializedFlag = true;
     }
   }
 
-  spawnCreep( role: string, roomName: string ): ScreepsReturnCode {
+  spawnCreep( role: string ): ScreepsReturnCode {
     let creepAttempt = Game.spawns[this.spawnName].spawnCreep([WORK, CARRY, MOVE], this.getName(), {
       memory: {role: role}
     });
