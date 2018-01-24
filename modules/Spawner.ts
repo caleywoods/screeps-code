@@ -69,4 +69,5 @@ export class Spawner {
 
   // Each tick use Panoptes watcher data to determine what type of creeps to spawn.
   // Somehow panoptes needs to know when creeps die to adjust the creep counts
+  // Panoptes or something needs to initialize each rooms memory with a jobs or desired creep role max count. Each tick is resetting panoptes counts.
 }
