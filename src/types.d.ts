@@ -7,7 +7,11 @@ declare const require: (module: string) => any;
 // }
 
 interface RoomMemory {
-  initializedFlag: boolean
+  harvesterCount: number,
+  harvesterMax: number,
+  initializedFlag: boolean,
+  upgraderCount: number,
+  upgraderMax: number
 }
 
 interface CreepMemory {

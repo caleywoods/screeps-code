@@ -12,29 +12,23 @@ export class Spawner {
 
   initializeRoom( roomName: string) : void {
     if ( ! Game.rooms[roomName].memory.initializedFlag ) {
-
-      // Need to spawn based on role and give it a role name to prepend before the name
-      let creepAttempt = Game.spawns[this.spawnName].spawnCreep([WORK, CARRY, MOVE], this.getName(), {
-        memory: {role: 'harvester'}
-      });
-
-      if ( creepAttempt === OK ) {
-        console.log('Creep successfully queued for spawning.');
-      }
-
-      if ( creepAttempt === ERR_NOT_ENOUGH_ENERGY ) {
-      }
-
-      /*
-        No real need to do anything here yet, if spawnCreep() fails with ERR_NAME_EXISTS
-        then it will just re-execute again on the next tick and likely get a new unique name.
-      */
-      if ( creepAttempt === ERR_NAME_EXISTS ) {
-      }
-
+      Game.rooms[roomName].memory.harvesterCount  = 0;
+      Game.rooms[roomName].memory.harvesterMax    = 5;
+      Game.rooms[roomName].memory.upgraderCount   = 0;
+      Game.rooms[roomName].memory.upgraderMax     = 5;
+      Game.rooms[roomName].memory.initializedFlag = true;
     }
+  }
 
-    Game.rooms[roomName].memory.initializedFlag = true;
+  /*
+    Has to be a better way to handle this without repeating the logic, too tired.
+  */
+  spawnCreep( role: string, roomName: string ): ScreepsReturnCode {
+    let creepAttempt = Game.spawns[this.spawnName].spawnCreep([WORK, CARRY, MOVE], this.getName(), {
+      memory: {role: role}
+    });
+
+    return creepAttempt;
   }
 
   /*
