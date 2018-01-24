@@ -20,9 +20,6 @@ export class Spawner {
     }
   }
 
-  /*
-    Has to be a better way to handle this without repeating the logic, too tired.
-  */
   spawnCreep( role: string, roomName: string ): ScreepsReturnCode {
     let creepAttempt = Game.spawns[this.spawnName].spawnCreep([WORK, CARRY, MOVE], this.getName(), {
       memory: {role: role}
