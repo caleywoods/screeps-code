@@ -1,13 +1,10 @@
-import { Panoptes } from './Panoptes';
 import { Harvester } from './Harvester';
 
 export class Spawner {
   public spawnName: string;
-  public panoptes: Panoptes;
 
   constructor(spawnName: string) {
     this.spawnName = spawnName;
-    this.panoptes  = new Panoptes();
   }
 
   initializeRoom( roomName: string) : void {
@@ -48,9 +45,9 @@ export class Spawner {
     ];
 
     let wordSoup = _.sample( wordsArray, 2 ).join( '-' );
-    let randNum  = _.random( 0,10000 )
+    let randNum  = _.random( 0,10000 );
 
-    return `${wordSoup}-${randNum}`
+    return `${wordSoup}-${randNum}`;
   }
 
   // Each tick use Panoptes watcher data to determine what type of creeps to spawn.
