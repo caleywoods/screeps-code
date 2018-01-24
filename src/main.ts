@@ -5,7 +5,8 @@ import { Spawner } from "../modules/Spawner";
 // This utility uses source maps to get the line numbers and file names of the original, TS source code
 export const loop = ErrorMapper.wrapLoop(() => {
   console.log(`Current game tick is ${Game.time}`);
-  // let spawnName = 'Spawn1';
+  let spawnName = 'Spawn1';
+  let roomName = 'W5N8';
 
   // Automatically delete memory of missing creeps
   for (const name in Memory.creeps) {
@@ -14,7 +15,9 @@ export const loop = ErrorMapper.wrapLoop(() => {
     }
   }
 
-  let spawner = new Spawner( 'Spawn1' );
+  let spawner = new Spawner( spawnName );
 
-  spawner.initializeRoom();
+
+  spawner.initializeRoom( roomName );
+  console.log( Game.rooms[roomName].memory.initializedFlag);
 });

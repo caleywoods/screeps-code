@@ -10,11 +10,8 @@ export class Spawner {
     this.panoptes  = new Panoptes();
   }
 
-  initializeRoom() : void {
-    // How to rinse and repeat this logic for all types of creeps without repeating?
-    if ( this.panoptes.harvesterCount === 0 ) {
-
-      let nextInLine = this.panoptes.harvesterCount + 1;
+  initializeRoom( roomName: string) : void {
+    if ( ! Game.rooms[roomName].memory.initializedFlag ) {
 
       // Need to spawn based on role and give it a role name to prepend before the name
       let creepAttempt = Game.spawns[this.spawnName].spawnCreep([WORK, CARRY, MOVE], this.getName(), {
@@ -23,12 +20,9 @@ export class Spawner {
 
       if ( creepAttempt === OK ) {
         console.log('Creep successfully queued for spawning.');
-        this.panoptes.harvesterCount++;
-
       }
 
       if ( creepAttempt === ERR_NOT_ENOUGH_ENERGY ) {
-        console.log('Not enough power to initiate creep spawning.');
       }
 
       /*
@@ -36,10 +30,11 @@ export class Spawner {
         then it will just re-execute again on the next tick and likely get a new unique name.
       */
       if ( creepAttempt === ERR_NAME_EXISTS ) {
-        console.log(`Creep with name: Harvester${nextInLine} already exists.`);
       }
 
     }
+
+    Game.rooms[roomName].memory.initializedFlag = true;
   }
 
   /*
