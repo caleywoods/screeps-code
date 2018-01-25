@@ -25,29 +25,31 @@ export class Spawner {
     return creepAttempt;
   }
 
-  /*
-    This should be "random" enough to get going, example names seen:
-
-    harmless-ugly-7244
-    arch-batch-6915
-    extraordinary-finch-4834
-    coast-cows-9047
-  */
+  //This should be "random" enough to get going
   getName() : string {
-    let wordsArray = [
-      'severe','bottle','agonizing','spider','disciple','fist','cotton','live',
-      'heartbroken','harmless','ignorant','cows','addict','north','small',
-      'kingdom','original','virtual','real','sideways','snake','oxen','mouse',
-      'batch','finite','baloney','coast','donut','snow','hungry','ugly','wet',
-      'face','knot','warm','arch','heist','doctor','fear','surreal','hotter',
-      'common','extraordinary','gymnast','sad','grainy','cat','conqueror',
-      'baboon','pony','horse','centaur','liger','elastic','consumer','finch'
+    let verbsArray = [
+      'severe','agonizing','live','heartbroken','harmless','ignorant','north',
+      'small','original','virtual','real','sideways','finite','hungry','ugly',
+      'wet','warm','surreal','hotter','common','extraordinary','sad','grainy',
+      'elastic','huge','bright','deadly','cloth', 'diagonal','acute','obtuse',
+      'diametric','imperial','royal','correct'
     ];
 
-    let wordSoup = _.sample( wordsArray, 2 ).join( '-' );
-    let randNum  = _.random( 0,10000 );
+    let nounsArray = [
+      'bottle','spider','disciple','fist','cotton','cows','addict','kingdom',
+      'snake','oxen','mouse','batch','baloney','coast','donut','snow',
+      'face','knot','arch','heist','doctor','fear','gymnast','cat','conqueror',
+      'baboon','pony','horse','centaur','liger','consumer','finch', 'peppermint',
+      'grenade','hymn','scar','shack','glider','laser','honey','harpoon',
+      'tornado','fellow','amateur','horse','battery','staple'
+    ];
 
-    return `${wordSoup}-${randNum}`;
+    let verb = _.sample( verbsArray, 1 );
+    let noun = _.sample( nounsArray, 1 );
+
+    let randNum = _.random( 0,10000 );
+
+    return `${verb}-${noun}-${randNum}`;
   }
 
   // Each tick use Panoptes watcher data to determine what type of creeps to spawn.
