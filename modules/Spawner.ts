@@ -1,3 +1,7 @@
+import { Harvester } from './Harvester';
+import { Upgrader } from './Upgrader';
+import { Creep } from './Creep';
+
 export class Spawner {
   public spawnName: string;
   public roomName: string;
@@ -15,6 +19,25 @@ export class Spawner {
       Game.rooms[this.roomName].memory.upgraderMax     = 5;
       Game.rooms[this.roomName].memory.initializedFlag = true;
     }
+  }
+
+  runCreeps(): void {
+    let creepers = Game.rooms[this.roomName].find( FIND_MY_CREEPS );
+
+    _.each( creepers, (creep: Creep) => {
+      switch( creep.memory.role ) {
+        case 'harvester':
+          const harvester = new Harvester( creep );
+          harvester.run()
+          break;
+        case 'upgrader':
+          const upgrader = new Upgrader( creep );
+          upgrader.run()
+          break;
+        default:
+          console.log( 'Unable to determine creep role.' );
+      }
+    });
   }
 
   spawnCreep( role: string ): ScreepsReturnCode {

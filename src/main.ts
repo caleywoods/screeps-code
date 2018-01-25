@@ -29,6 +29,7 @@ export const loop = ErrorMapper.wrapLoop(() => {
 
   // Should just fire once, then the bool is tripped to true
   spawner.initializeRoom();
+  spawner.runCreeps();
 
   if ( Game.rooms[roomName].memory.harvesterCount < Game.rooms[roomName].memory.harvesterMax ) {
     let spawn = spawner.spawnCreep( 'harvester' );
