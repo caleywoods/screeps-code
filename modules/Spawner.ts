@@ -1,6 +1,6 @@
 import { Harvester } from './Harvester';
 import { Upgrader } from './Upgrader';
-import { Creep } from './Creep';
+import { Creeper } from './Creeper';
 
 export class Spawner {
   public spawnName: string;
@@ -27,11 +27,11 @@ export class Spawner {
     _.each( creepers, (creep: Creep) => {
       switch( creep.memory.role ) {
         case 'harvester':
-          const harvester = new Harvester( creep );
+          const harvester = new Harvester( creep, Game.rooms[this.roomName] );
           harvester.run()
           break;
         case 'upgrader':
-          const upgrader = new Upgrader( creep );
+          const upgrader = new Upgrader( creep, Game.rooms[this.roomName] );
           upgrader.run()
           break;
         default:
